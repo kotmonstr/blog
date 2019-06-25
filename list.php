@@ -1,6 +1,8 @@
 <?php
+
 $conn = new mysqli('localhost', 'root', '', 'blog');
 $sql = 'SELECT * FROM articuls ORDER BY date DESC';
+
 $result = mysqli_query($conn,$sql);
 ?>
 <!DOCTYPE html>
@@ -18,7 +20,12 @@ $result = mysqli_query($conn,$sql);
 
             while ($row = mysqli_fetch_assoc($result)) {
             echo $row["id"];
-            echo $row["title"];
+$ID = $row["id"];
+$TITLE = $row["title"];
+$CONTENT = $row['content'];
+$AUTHOR = $row['author'];
+
+            echo "<a href='index.php?id=$ID'>'.$TITLE.'</a><BR>";
             echo $row["content"];
             echo $row["author"];
             echo date("H:i:s",$row["date"]); // преобразовали время из unix
