@@ -1,0 +1,1 @@
+<?php  echo "(c)Артём". date("Y",time()) ?>
