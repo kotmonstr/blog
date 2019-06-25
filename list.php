@@ -2,6 +2,9 @@
 $conn = new mysqli('localhost', 'root', '', 'bloog');
 $sql = 'SELECT * FROM articuls ORDER BY data DESC';
 $result = mysqli_query($conn,$sql);
+
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -16,7 +19,10 @@ $result = mysqli_query($conn,$sql);
     <?php include 'header.php';
 
     while ($row = mysqli_fetch_assoc($result)) {
-            echo $row["id"];
+        $ID = $row["id"];
+        $TITLE = $row["title"];
+
+        echo "<a href='index.php?id=$ID'>'.$TITLE.'</a><BR>";
             echo $row["title"];
             echo $row["content"];
             echo $row["autor"];
