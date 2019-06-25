@@ -8,6 +8,8 @@
     </head>
 
     <body>
+    <div class="container">
+    <?php include 'header.php'; ?>
     <form action="index.php" method="post">
         <div class="form-group">
             <div class="row">
@@ -28,14 +30,15 @@
             <input type="text" class="form-control" name="author">
         </div>
         <div class="col-md-6">
+            <br>
             <button type="submit" class="btn btn-primary">Отправить</button>
         </div>
     </form>
+    </div>
     <?php
     include 'function.php';
+    include 'footer.php';
     ?>
-
-
     </body>
 
 </html>
