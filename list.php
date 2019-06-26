@@ -1,40 +1,63 @@
 <?php
-$conn = new mysqli('localhost', 'root', '', 'bloog');
-$sql = 'SELECT * FROM articuls ORDER BY data DESC';
+
+$conn = new mysqli('localhost', 'root', '', 'blog');
+$sql = 'SELECT * FROM articuls ORDER BY date DESC';
 $result = mysqli_query($conn,$sql);
-
-
-
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="css/bootstrap.css" type="text/css">
-    <title>Список постов</title>
-</head>
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="css/bootstrap.css" type="text/css">
+        <title>Список постов</title>
+    </head>
 
-<body>
-<div class="container">
-    <?php include 'header.php';
+    <body>
 
-    while ($row = mysqli_fetch_assoc($result)) {
-        $ID = $row["id"];
-        $TITLE = $row["title"];
+    <div class="container">
+        <?php include 'header.php'; ?>
 
-        echo "<a href='index.php?id=$ID'>'.$TITLE.'</a><BR>";
-            echo $row["title"];
-            echo $row["content"];
-            echo $row["autor"];
-            echo date("H:i:s",$row["data"]); // преобразовали время из unix
-        echo '<br>';
-    }
-    ?>
-</div>
-<?php
 
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Заголовок</th>
+<!--                <th scope="col">Контент</th>-->
+                <th scope="col">Автор</th>
+                <th scope="col">Дата создания</th>
+                <th scope="col">Действие</th>
+                <th scope="col">Удаление</th>
+
+            </tr>
+            <tbody>
+
+            <?
+
+            while ($row = mysqli_fetch_assoc($result)) {
+
+                echo '<th score = "row">' . $row["id"] . '</th>';
+
+                $ID = $row["id"];
+                $TITLE = $row["title"];
+                $CONTENT = $row['content'];
+                $AUTHOR = $row['author'];
+                echo '<td>' . "<a href='index.php?id=$ID'>'.$TITLE.'</a>" . '</td>';
+//                echo '<td>' . $row["content"] . '</td>';
+                echo '<td>' . $row["author"] . '</td>';
+                echo '<td>' . date("H﻿﻿:i:s", $row["date"]) . '</td>'; // преобразовали время из unixecho
+                echo '<td><a href="view.php?view_id=' . $ID . '">' . '<button type="button" class="btn btn-success">Просмотр</button>' . '</a>' . '</td>';
+                echo '<td><a href="list.php?delete_id=' . $ID . '">' . '<button type="button" class="btn btn-danger">Удаление</button>' . '</a>' . '</td>';
+                echo '</tr>';
+            }
+            ?>
+    </div>
+
+    </body>
+
+    </html>
+<?
+include 'function.php';
 include 'footer.php';
 ?>
-</body>
-
-</html>

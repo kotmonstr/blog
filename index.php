@@ -1,3 +1,5 @@
+
+
 <?php
 include 'function.php';
 if(isset($_GET['id'])){
@@ -6,25 +8,19 @@ if(isset($_GET['id'])){
     $sql2 = "SELECT * FROM articuls WHERE id = $id";
     $result = mysqli_query($conn,$sql2);
     /*var_dump($result); die('stopes by Kostya');*/
-
 }else{
     $id = false;
 }
-
-
-
 if($id == true){ //если существует id
     $model =$result->fetch_array();
     $title = $model['title'];
     $content = $model['content'];
-    $autor = $model['autor'];
-
+    $author = $model['author'];
 }else{
     $title ='';
     $content = '';
-    $autor = '';
+    $author = '';
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -32,13 +28,24 @@ if($id == true){ //если существует id
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/bootstrap.css" type="text/css">
+    <script
+            src="http://code.jquery.com/jquery-3.4.1.js"
+            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+            crossorigin="anonymous"></script>
     <title>Blog</title>
 </head>
 
 <body>
 <div class="container">
     <?php include 'header.php'; ?>
+
     <form action="index.php" method="post">
+        <?php if( isset( $_GET['id'] ) ){ ?>
+            <div class="col-md-6">
+                <label>ID</label>
+                <input type="hidden" class="form-control" name="id" value="<? echo $id ?>">
+            </div>
+        <?php } ?>
         <div class="form-group">
             <div class="row">
                 <div class="col-md-6">
@@ -46,16 +53,16 @@ if($id == true){ //если существует id
             </div>
         </div>
         <div class="col-md-6">
-            <label>Title</label>
+            <label>Наименование</label>
             <input type="text" class="form-control" name="title" value="<? echo $title ?>">
         </div>
         <div class="col-md-6">
-            <label>Content</label>
-            <input type="text" class="form-control" name="content" value="<? echo $content?>">
+            <label>Содержание</label>
+            <textarea class="form-control" name="content"><? echo $content?></textarea>
         </div>
         <div class="col-md-6">
-            <label>Author</label>
-            <input type="text" class="form-control" name="autor" value="<? echo $autor?>">
+            <label>Автор</label>
+            <input type="text" class="form-control" name="author" value="<? echo $author?>">
         </div>
         <div class="col-md-6">
             <br>
@@ -63,10 +70,12 @@ if($id == true){ //если существует id
         </div>
     </form>
 </div>
-<?php
+<div class="container">
+    <?php
+    include 'footer.php';
+    ?>
+</div>
 
-include 'footer.php';
-?>
 </body>
-
 </html>
+
