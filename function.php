@@ -20,7 +20,7 @@ if (isset($_POST) && $_POST != NULL && empty($_POST['id'])) { //если сущ�
     <?$conn -> close();
 }
 elseif (isset($_POST) && $_POST != NULL && !empty($_POST['id'])){
-    echo "UPDATE";
+   // echo "UPDATE";
     $TITLE = "'" . $_POST['title'] . "'";
     $CONTENT = "'" . $_POST['content'] . "'";
     $AUTHOR = "'" . $_POST['author'] . "'";
@@ -36,7 +36,7 @@ elseif (isset($_POST) && $_POST != NULL && !empty($_POST['id'])){
     mysqli_query($conn,$sql);
     $q = "SELECT * FROM articuls WHERE id ='".$_POST['id'];
     $result = mysqli_query($conn, $q);
-    var_dump($sql);
+    //var_dump($sql);
 }
 /*
  * Удаление поста

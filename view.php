@@ -1,4 +1,5 @@
 <?php
+
 $conn = new mysqli('localhost', 'root', '', 'blog');
 $ID = $_GET['watching_id'];
 $sql = "SELECT * FROM articuls WHERE id = $ID";
@@ -14,14 +15,12 @@ $result = $model->fetch_array();
     </head>
     <body>
     <div class="container">
-    /*
-    * Просмотр поста
-    */
-<?php
-$TITLE = "'" . $result['title'] . "'";
-$CONTENT = "'" . $result['content'] . "'";
-$AUTHOR = "'" . $result['author'] . "'";
-$TIME = "'" . $result['date'] . "'";
+    <!-- Просмотр поста !-->
+    <?php
+$TITLE = "" . $result['title'] . "";
+$CONTENT = "" . $result['content'] . "";
+$AUTHOR = "" . $result['author'] . "";
+$TIME = "" . $result['date'] . "";
 
 
 
@@ -30,19 +29,20 @@ $TIME = "'" . $result['date'] . "'";
             $sql = "SELECT * FROM articuls WHERE id = $ID";
 
             $result = mysqli_query($conn, $sql);
-            var_dump($result);
+
             ?>
 
             <div class="well">
-                <h1>title<?php echo $TITLE ?></h1>
-                <p>content <?php echo $CONTENT ?></p>
-                <p>author <?php echo $AUTHOR ?></p>
-                <p>date <?php echo $TIME ?></p>
+               <?php  include 'header.php'; ?>
+                <h1><?php echo $TITLE ?></h1>
+                <p><?php echo $CONTENT ?></p>
+                <p>Автор поста: <?php echo $AUTHOR ?></p>
+                <p>Дата создания <?php echo date("H:i:s", $TIME) ?></p>
             </div>
 
             <?php
         }
-            include 'header.php';
+
             include 'footer.php';
             ?>
 
