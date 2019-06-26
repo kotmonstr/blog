@@ -1,3 +1,3 @@
 <?php
-echo 'Дима ', date("Y", time())
+/*echo 'Дима ', date("Y", time())*/
 ?>
